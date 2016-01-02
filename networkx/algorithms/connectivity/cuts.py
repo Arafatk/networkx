@@ -137,6 +137,8 @@ def minimum_st_edge_cut(G, s, t, flow_func=None, auxiliary=None,
     5
 
     """
+    if G.has_edge(s,t) or G.has_edge(t,s):
+        return []
     if flow_func is None:
         flow_func = default_flow_func
 

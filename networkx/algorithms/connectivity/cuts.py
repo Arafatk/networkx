@@ -285,8 +285,7 @@ def minimum_st_node_cut(G, s, t, flow_func=None, auxiliary=None, residual=None):
     mapping = H.graph.get('mapping', None)
     if mapping is None:
         raise nx.NetworkXError('Invalid auxiliary digraph.')
-    if G.has_edge(s, t) or G.has_edge(t, s):
-        return []
+
     kwargs = dict(flow_func=flow_func, residual=residual, auxiliary=H)
 
     # The edge cut in the auxiliary digraph corresponds to the node cut in the
@@ -515,7 +514,10 @@ def minimum_edge_cut(G, s=None, t=None, flow_func=None):
     flow between an arbitrary node in the dominating set and the rest of
     nodes in it. This is an implementation of algorithm 6 in [1]_. For 
     directed graphs, the algorithm does n calls to the max flow function.
+    The function raises an error if the directed graph is not weakly
+    connected and returns an empty set if it is weakly connected.
     It is an implementation of algorithm 8 in [1]_.
+
 
     See also
     --------
